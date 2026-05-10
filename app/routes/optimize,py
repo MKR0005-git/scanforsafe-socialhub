@@ -5,12 +5,48 @@ router = APIRouter()
 @router.post("/optimize")
 async def optimize(data: dict):
 
-    content = data.get("content")
+    content = data.get("content", "")
+
+    facebook_post = (
+        content +
+        "\n\n#ScanForSafe #VehicleSafety #EmergencyHelp"
+    )
+
+    instagram_post = (
+        content +
+        "\n\n🚨 Stay safe everywhere."
+        "\n\n#ScanForSafe #Emergency #Safety #RoadSafety #QRCode #VehicleSafety"
+    )
+
+    twitter_post = (
+        content[:180] +
+        " #ScanForSafe"
+    )
+
+    linkedin_post = (
+        content +
+        "\n\nScanForSafe helps improve emergency response and vehicle safety using smart QR technology."
+    )
+
+    whatsapp_post = (
+        content +
+        "\n\nStay safe. Share with family and friends."
+    )
+
+    youtube_post = (
+        content +
+        "\n\nSubscribe for more safety awareness updates."
+    )
 
     return {
-        "original": content,
-        "facebook": content + " #ScanForSafe #VehicleSafety",
-        "instagram": content + " 🚨 #ScanForSafe #Safety #Emergency",
-        "twitter": content[:200],
-        "linkedin": content + " | Professional vehicle emergency solution."
+        "success": True,
+        "data": {
+            "original": content,
+            "facebook": facebook_post,
+            "instagram": instagram_post,
+            "twitter": twitter_post,
+            "linkedin": linkedin_post,
+            "whatsapp": whatsapp_post,
+            "youtube": youtube_post
+        }
     }
