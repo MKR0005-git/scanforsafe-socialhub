@@ -3,7 +3,10 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.routes.optimize import router as optimize_router
 
-app = FastAPI()
+app = FastAPI(
+    title="ScanForSafe API",
+    version="1.0.0"
+)
 
 app.add_middleware(
     CORSMiddleware,
@@ -15,8 +18,17 @@ app.add_middleware(
 
 app.include_router(optimize_router)
 
+
 @app.get("/")
 async def root():
     return {
+        "success": True,
         "message": "ScanForSafe Backend Running"
+    }
+
+
+@app.get("/health")
+async def health():
+    return {
+        "status": "healthy"
     }
