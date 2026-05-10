@@ -1,0 +1,16 @@
+from fastapi import APIRouter
+
+router = APIRouter()
+
+@router.post("/optimize")
+async def optimize(data: dict):
+
+    content = data.get("content")
+
+    return {
+        "original": content,
+        "facebook": content + " #ScanForSafe #VehicleSafety",
+        "instagram": content + " 🚨 #ScanForSafe #Safety #Emergency",
+        "twitter": content[:200],
+        "linkedin": content + " | Professional vehicle emergency solution."
+    }
